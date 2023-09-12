@@ -10,4 +10,12 @@
 	go build .
 	./redis_exporter -redis.addr localhost:6379
  - Replace local prometheus.yml with /Prometheus/prometheus.yml & run ./prometheus
+
+
+![Local Image](./images/api.png)
+
+![Local Image](./images/redis1.png)
+
+![Local Image](./images/redis2.png)
+
  
