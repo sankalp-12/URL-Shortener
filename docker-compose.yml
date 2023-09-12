@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  db:
+    build: db
+    ports:
+      - "6379:6379"
+    volumes:
+      - .data:/data
+
+  api:
+    build: api
+    ports: 
+      - "3000:3000"
+    depends_on:
+      - db
+      
+  redis_expo:
+    image: oliver006/redis_exporter:latest
+    command:
+      - '--redis.addr=redis://db:6379'
+    ports:
+      - "9121:9121"
+    depends_on:
+      - db
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports: 
+      - "9090:9090"
+    depends_on:
+      - api
+      - redis_expo
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+      
+volumes:
+  grafana-data:
+
