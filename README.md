@@ -34,11 +34,11 @@ This is an implementation of a URL-Shortener in **Go** with **Redis** as the in-
 
 
 
-![Local Image](./images/api.png)
+![Local Image](./api.png)
 
-![Local Image](./images/redis1.png)
+![Local Image](./redis1.png)
 
-![Local Image](./images/redis2.png)
+![Local Image](./redis2.png)
 
 7. Note that to get metrics for a locally deployed application, you will have to hit the APIs yourself. **Postman** and **JMeter** were used for performance testing of the application to capture the above metrics. For Postman specifically, you can use pre-test scripts written in vanilla JavaScript to automate performance tests. However, if you want to automate stress tests in particular, _JMeter_ is recommended as it allows you to engage in _IP Spoofing_ to test your application from different IPs, in case you have a single machine for load testing.  
 
